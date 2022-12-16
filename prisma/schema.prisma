@@ -13,7 +13,7 @@ datasource db {
 model User {
   id         String   @id @default(uuid())
   name       String
-  email      String
+  email      String   @unique
   avatar     String
   created_at DateTime @default(now())
   tasks      Task[]
@@ -30,8 +30,8 @@ model Task {
   url_task    String
   created_at  DateTime @default(now())
   issues      Issue[]
-  User        User?    @relation(fields: [userId], references: [id])
-  userId      String?
+  User        User?    @relation(fields: [user_id], references: [id])
+  user_id     String?
 
   @@map("tasks")
 }
@@ -40,8 +40,8 @@ model Issue {
   id          String   @id @default(uuid())
   description String
   created_at  DateTime
-  Task        Task?    @relation(fields: [taskId], references: [id])
-  taskId      String?
+  Task        Task?    @relation(fields: [task_id], references: [id])
+  task_id     String?
 
   @@map("issues")
 }
