@@ -16,7 +16,7 @@ describe('Create user', () => {
     expect(usersRepository.users[0]).toEqual(user);
   });
 
-  it('should be not able to create a user when exists user', async () => {
+  it('should be not able to create a user when email exists other user', async () => {
     const usersRepository = new InMemoryUsersRepository();
     const createUser = new CreateUser(usersRepository);
 
