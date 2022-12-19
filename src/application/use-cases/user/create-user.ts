@@ -1,6 +1,7 @@
 import { UsersRepository } from '@application/repositories/users.repository';
 import { Email } from '@application/entities/user/email';
 import { User } from '@application/entities/user/user';
+import { UserAlreadyExists } from './errors/user-already-exists.error';
 
 interface CreateUserRequest {
   name: string;
@@ -27,7 +28,7 @@ export class CreateUser {
     const existsUser = await this.usersRepository.findByEmail(user.email.value);
 
     if (existsUser) {
-      throw new Error('User already exists');
+      throw new UserAlreadyExists();
     }
 
     await this.usersRepository.create(user);
