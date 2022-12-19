@@ -1,3 +1,4 @@
+import { Injectable } from '@nestjs/common';
 import { Email } from '@application/entities/user/email';
 import { UserNotFound } from './errors/user-not-found.error';
 import { UsersRepository } from '@application/repositories/users.repository';
@@ -9,6 +10,7 @@ interface ChangeEmailUserRequest {
 
 type ChangeEmailUserResponse = void;
 
+@Injectable()
 export class ChangeEmailUser {
   constructor(private usersRepository: UsersRepository) {}
 

@@ -6,8 +6,8 @@ export interface UserProps {
   name: string;
   email: Email;
   avatar: string;
+  status: string;
   createdAt: Date;
-  status: 'active' | 'inactive';
 }
 
 export class User {
@@ -15,10 +15,7 @@ export class User {
   private props: UserProps;
 
   constructor(
-    props: Replace<
-      UserProps,
-      { status?: 'active' | 'inactive'; createdAt?: Date }
-    >,
+    props: Replace<UserProps, { status?: string; createdAt?: Date }>,
     id?: string,
   ) {
     this._id = id ?? randomUUID();
@@ -61,7 +58,7 @@ export class User {
     this.props.status = 'inactive';
   }
 
-  public get status(): 'active' | 'inactive' {
+  public get status(): string {
     return this.props.status;
   }
 

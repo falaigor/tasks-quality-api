@@ -1,11 +1,13 @@
-import { UsersRepository } from '@application/repositories/users.repository';
+import { Injectable } from '@nestjs/common';
 import { UserNotFound } from './errors/user-not-found.error';
+import { UsersRepository } from '@application/repositories/users.repository';
 
 interface ChangeAvatarUserRequest {
   userId: string;
   avatar: string;
 }
 
+@Injectable()
 export class ChangeAvatarUser {
   constructor(private usersRepository: UsersRepository) {}
 

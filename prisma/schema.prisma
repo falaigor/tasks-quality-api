@@ -10,16 +10,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Users {
+model User {
   id        String   @id @default(uuid())
   name      String
   email     String   @unique
   avatar    String
+  status    String
   createdAt DateTime @default(now())
-  tasks     Tasks[]
+  tasks     Task[]
 }
 
-model Tasks {
+model Task {
   id         String    @id @default(uuid())
   title      String
   status     String
@@ -28,7 +29,7 @@ model Tasks {
   url_task   String
   createdAt  DateTime  @default(now())
   issues     Issues[]
-  User       Users?    @relation(fields: [userId], references: [id])
+  User       User?     @relation(fields: [userId], references: [id])
   userId     String?
 
   @@map("tasks")
@@ -38,7 +39,7 @@ model Issues {
   id          String   @id @default(uuid())
   description String
   createdAt   DateTime
-  Task        Tasks?   @relation(fields: [taskId], references: [id])
+  Task        Task?    @relation(fields: [taskId], references: [id])
   taskId      String?
 
   @@map("issues")

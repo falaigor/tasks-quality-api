@@ -1,7 +1,8 @@
-import { UsersRepository } from '@application/repositories/users.repository';
-import { Email } from '@application/entities/user/email';
+import { Injectable } from '@nestjs/common';
 import { User } from '@application/entities/user/user';
+import { Email } from '@application/entities/user/email';
 import { UserAlreadyExists } from './errors/user-already-exists.error';
+import { UsersRepository } from '@application/repositories/users.repository';
 
 interface CreateUserRequest {
   name: string;
@@ -13,6 +14,7 @@ interface CreateUserResponse {
   user: User;
 }
 
+@Injectable()
 export class CreateUser {
   constructor(private usersRepository: UsersRepository) {}
 

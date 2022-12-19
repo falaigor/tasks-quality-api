@@ -1,5 +1,6 @@
-import { UsersRepository } from '@application/repositories/users.repository';
+import { Injectable } from '@nestjs/common';
 import { UserNotFound } from './errors/user-not-found.error';
+import { UsersRepository } from '@application/repositories/users.repository';
 
 interface DeactivateUserRequest {
   userId: string;
@@ -7,6 +8,7 @@ interface DeactivateUserRequest {
 
 type DeactivateUserResponse = void;
 
+@Injectable()
 export class DeactivateUser {
   constructor(private usersRepository: UsersRepository) {}
 
