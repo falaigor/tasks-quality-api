@@ -2,7 +2,6 @@ import { randomUUID } from 'crypto';
 import { Replace } from '@helpers/Replace';
 
 export interface TaskProps {
-  id: string;
   userId: string;
   title: string;
   description?: string;
