@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   Patch,
   Post,
@@ -18,6 +20,8 @@ import { ChangeAvatarUser } from '@application/use-cases/user/change-avatar-user
 import { GetUser } from '@application/use-cases/user/get-user';
 import { User } from '@application/entities/user/user';
 import { GetAllUsers } from '../../../../application/use-cases/user/get-all-users';
+import { UserNotFound } from '@application/use-cases/user/errors/user-not-found.error';
+import { UserAlreadyExists } from '@application/use-cases/user/errors/user-already-exists.error';
 
 @Controller('users')
 export class UsersController {
@@ -33,7 +37,13 @@ export class UsersController {
 
   @Patch(':userId/deactivate')
   async deactivate(@Param('userId') userId: string) {
-    await this.deactivateUser.execute({ userId });
+    try {
+      await this.deactivateUser.execute({ userId });
+    } catch (err) {
+      if (err instanceof UserNotFound) {
+        throw new HttpException('User not found', HttpStatus.BAD_REQUEST);
+      }
+    }
   }
 
   @Patch(':userId/change-email')
@@ -41,8 +51,14 @@ export class UsersController {
     @Param('userId') userId: string,
     @Body() body: { email: string },
   ) {
-    const { email } = body;
-    await this.changeEmailUser.execute({ userId, email: new Email(email) });
+    try {
+      const { email } = body;
+      await this.changeEmailUser.execute({ userId, email: new Email(email) });
+    } catch (err) {
+      if (err instanceof UserNotFound) {
+        throw new HttpException('User not found', HttpStatus.BAD_REQUEST);
+      }
+    }
   }
 
   @Patch(':userId/change-avatar')
@@ -50,8 +66,14 @@ export class UsersController {
     @Param('userId') userId: string,
     @Body() body: { avatar: string },
   ) {
-    const { avatar } = body;
-    await this.changeAvatarUser.execute({ userId, avatar });
+    try {
+      const { avatar } = body;
+      await this.changeAvatarUser.execute({ userId, avatar });
+    } catch (err) {
+      if (err instanceof UserNotFound) {
+        throw new HttpException('User not found', HttpStatus.BAD_REQUEST);
+      }
+    }
   }
 
   @Get()
@@ -65,32 +87,49 @@ export class UsersController {
 
   @Get(':userId')
   async getUserById(@Param('userId') userId: string) {
-    const { user } = await this.getUser.execute({
-      userId,
-    });
+    try {
+      const { user } = await this.getUser.execute({
+        userId,
+      });
 
-    return {
-      user: UserViewModel.toHTTP(user),
-    };
+      return {
+        user: UserViewModel.toHTTP(user),
+      };
+    } catch (err) {
+      if (err instanceof UserNotFound) {
+        throw new HttpException('User not found', HttpStatus.BAD_REQUEST);
+      }
+    }
   }
 
   @Post()
   async create(@Body() body: CreateUserBody) {
-    const { name, email, avatar } = body;
+    try {
+      const { name, email, avatar } = body;
+      const { user } = await this.createUser.execute({
+        name,
+        email,
+        avatar,
+      });
 
-    const { user } = await this.createUser.execute({
-      name,
-      email,
-      avatar,
-    });
-
-    return {
-      user: UserViewModel.toHTTP(user),
-    };
+      return {
+        user: UserViewModel.toHTTP(user),
+      };
+    } catch (err) {
+      if (err instanceof UserAlreadyExists) {
+        throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
+      }
+    }
   }
 
   @Delete(':userId/delete')
   async delete(@Param('userId') userId: string) {
-    await this.deleteUser.execute({ userId });
+    try {
+      await this.deleteUser.execute({ userId });
+    } catch (err) {
+      if (err instanceof UserNotFound) {
+        throw new HttpException('User not found', HttpStatus.BAD_REQUEST);
+      }
+    }
   }
 }
