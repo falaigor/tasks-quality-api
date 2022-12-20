@@ -15,6 +15,8 @@ import { DeleteUser } from '@application/use-cases/user/delete-user';
 import { DeactivateUser } from '@application/use-cases/user/deactivate-user';
 import { ChangeEmailUser } from '@application/use-cases/user/change-email-user';
 import { ChangeAvatarUser } from '@application/use-cases/user/change-avatar-user';
+import { GetUser } from '@application/use-cases/user/get-user';
+import { User } from '@application/entities/user/user';
 
 @Controller('users')
 export class UsersController {
@@ -24,26 +26,41 @@ export class UsersController {
     private changeEmailUser: ChangeEmailUser,
     private changeAvatarUser: ChangeAvatarUser,
     private deleteUser: DeleteUser,
+    private getUser: GetUser,
   ) {}
 
-  @Patch(':id/deactivate')
-  async deactivate(@Param('id') id: string) {
-    await this.deactivateUser.execute({ userId: id });
+  @Patch(':userId/deactivate')
+  async deactivate(@Param('userId') userId: string) {
+    await this.deactivateUser.execute({ userId });
   }
 
-  @Patch(':id/change-email')
-  async changeEmail(@Param('id') id: string, @Body() body: { email: string }) {
+  @Patch(':userId/change-email')
+  async changeEmail(
+    @Param('userId') userId: string,
+    @Body() body: { email: string },
+  ) {
     const { email } = body;
-    await this.changeEmailUser.execute({ userId: id, email: new Email(email) });
+    await this.changeEmailUser.execute({ userId, email: new Email(email) });
   }
 
-  @Patch(':id/change-avatar')
+  @Patch(':userId/change-avatar')
   async changeAvatar(
-    @Param('id') id: string,
+    @Param('userId') userId: string,
     @Body() body: { avatar: string },
   ) {
     const { avatar } = body;
-    await this.changeAvatarUser.execute({ userId: id, avatar });
+    await this.changeAvatarUser.execute({ userId, avatar });
+  }
+
+  @Get(':userId')
+  async getUserById(@Param('userId') userId: string) {
+    const { user } = await this.getUser.execute({
+      userId,
+    });
+
+    return {
+      user: UserViewModel.toHTTP(user),
+    };
   }
 
   @Post()
@@ -61,8 +78,8 @@ export class UsersController {
     };
   }
 
-  @Delete(':id/delete')
-  async delete(@Param('id') id: string) {
-    await this.deleteUser.execute({ userId: id });
+  @Delete(':userId/delete')
+  async delete(@Param('userId') userId: string) {
+    await this.deleteUser.execute({ userId });
   }
 }

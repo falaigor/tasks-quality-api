@@ -6,6 +6,7 @@ import { DeactivateUser } from '@application/use-cases/user/deactivate-user';
 import { ChangeEmailUser } from '@application/use-cases/user/change-email-user';
 import { ChangeAvatarUser } from '@application/use-cases/user/change-avatar-user';
 import { DeleteUser } from '@application/use-cases/user/delete-user';
+import { GetUser } from '@application/use-cases/user/get-user';
 
 @Module({
   imports: [DatabaseModule],
@@ -16,6 +17,7 @@ import { DeleteUser } from '@application/use-cases/user/delete-user';
     ChangeEmailUser,
     ChangeAvatarUser,
     DeleteUser,
+    GetUser,
   ],
 })
 export class UserModule {}

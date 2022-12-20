@@ -26,17 +26,4 @@ export class PrismaUserMapper {
       raw.id,
     );
   }
-
-  static toDomainAll(raw: RawUser) {
-    return new User(
-      {
-        name: raw.name,
-        email: new Email(raw.email),
-        avatar: raw.avatar,
-        status: raw.status,
-        createdAt: raw.createdAt,
-      },
-      raw.id,
-    );
-  }
 }
