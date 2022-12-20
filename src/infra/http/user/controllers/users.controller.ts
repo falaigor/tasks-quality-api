@@ -17,6 +17,7 @@ import { ChangeEmailUser } from '@application/use-cases/user/change-email-user';
 import { ChangeAvatarUser } from '@application/use-cases/user/change-avatar-user';
 import { GetUser } from '@application/use-cases/user/get-user';
 import { User } from '@application/entities/user/user';
+import { GetAllUsers } from '../../../../application/use-cases/user/get-all-users';
 
 @Controller('users')
 export class UsersController {
@@ -27,6 +28,7 @@ export class UsersController {
     private changeAvatarUser: ChangeAvatarUser,
     private deleteUser: DeleteUser,
     private getUser: GetUser,
+    private getAllUsers: GetAllUsers,
   ) {}
 
   @Patch(':userId/deactivate')
@@ -50,6 +52,15 @@ export class UsersController {
   ) {
     const { avatar } = body;
     await this.changeAvatarUser.execute({ userId, avatar });
+  }
+
+  @Get()
+  async getAll() {
+    const { users } = await this.getAllUsers.execute();
+
+    return {
+      users: users.map(UserViewModel.toHTTP),
+    };
   }
 
   @Get(':userId')

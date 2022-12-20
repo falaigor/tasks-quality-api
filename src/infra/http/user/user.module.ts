@@ -7,6 +7,7 @@ import { ChangeEmailUser } from '@application/use-cases/user/change-email-user';
 import { ChangeAvatarUser } from '@application/use-cases/user/change-avatar-user';
 import { DeleteUser } from '@application/use-cases/user/delete-user';
 import { GetUser } from '@application/use-cases/user/get-user';
+import { GetAllUsers } from '@application/use-cases/user/get-all-users';
 
 @Module({
   imports: [DatabaseModule],
@@ -18,6 +19,7 @@ import { GetUser } from '@application/use-cases/user/get-user';
     ChangeAvatarUser,
     DeleteUser,
     GetUser,
+    GetAllUsers,
   ],
 })
 export class UserModule {}
