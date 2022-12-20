@@ -7,7 +7,7 @@ describe('Taks', () => {
       title: 'Uma nova task',
       description: 'Uma descrição bem legal',
       startedAt: new Date(),
-      finishedAt: new Date(1671720896),
+      dueDateAt: new Date(1671720896),
       urlTask: 'http://url-link-task.com',
     });
 

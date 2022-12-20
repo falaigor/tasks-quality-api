@@ -6,7 +6,7 @@ interface AddTaskRequest {
   title: string;
   description?: string;
   startedAt?: Date | null;
-  finishedAt?: Date | null;
+  dueDateAt?: Date | null;
   urlTask?: string;
 }
 
@@ -18,7 +18,7 @@ export class AddTask {
   constructor(private tasksRepository: TasksRepository) {}
 
   async execute(request: AddTaskRequest): Promise<AddTaskResponse> {
-    const { userId, title, description, startedAt, finishedAt, urlTask } =
+    const { userId, title, description, startedAt, dueDateAt, urlTask } =
       request;
 
     const task = new Task({
@@ -26,7 +26,7 @@ export class AddTask {
       title,
       description,
       startedAt,
-      finishedAt,
+      dueDateAt,
       urlTask,
     });
 

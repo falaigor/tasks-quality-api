@@ -11,7 +11,7 @@ describe('Send notification', () => {
       title: 'Task 1',
       description: 'Uma descrição da task',
       startedAt: new Date(),
-      finishedAt: new Date(1671720896),
+      dueDateAt: new Date(1671720896),
       urlTask: 'http://url-task.com',
     });
 

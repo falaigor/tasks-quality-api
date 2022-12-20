@@ -7,6 +7,7 @@ export interface TaskProps {
   description?: string;
   status: string;
   startedAt?: Date | null;
+  dueDateAt?: Date | null;
   finishedAt?: Date | null;
   urlTask?: string;
   createdAt: Date;
@@ -66,6 +67,14 @@ export class Task {
 
   public get startedAt(): Date | null | undefined {
     return this.props.startedAt;
+  }
+
+  public set dueDateAt(dueDateAt: Date | null | undefined) {
+    this.props.dueDateAt = dueDateAt;
+  }
+
+  public get dueDateAt(): Date | null | undefined {
+    return this.props.dueDateAt;
   }
 
   public set finishedAt(finishedAt: Date | null | undefined) {
