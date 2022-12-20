@@ -9,12 +9,12 @@ import {
 } from '@nestjs/common';
 import { CreateUserBody } from '../dtos/create-user-body';
 import { UserViewModel } from '../view-models/user.view-model';
+import { Email } from '@application/entities/user/email';
 import { CreateUser } from '@application/use-cases/user/create-user';
+import { DeleteUser } from '@application/use-cases/user/delete-user';
 import { DeactivateUser } from '@application/use-cases/user/deactivate-user';
 import { ChangeEmailUser } from '@application/use-cases/user/change-email-user';
 import { ChangeAvatarUser } from '@application/use-cases/user/change-avatar-user';
-import { Email } from '@application/entities/user/email';
-import { DeleteUser } from '@application/use-cases/user/delete-user';
 
 @Controller('users')
 export class UsersController {

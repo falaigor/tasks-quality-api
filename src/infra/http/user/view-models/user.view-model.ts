@@ -7,6 +7,7 @@ export class UserViewModel {
       name: user.name,
       email: user.email.value,
       status: user.status,
+      createdAt: user.createdAt,
     };
   }
 }
