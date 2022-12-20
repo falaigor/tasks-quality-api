@@ -29,12 +29,8 @@ export class Task {
     };
   }
 
-  public set title(title: string) {
-    this.props.title = title;
-  }
-
-  public get title(): string {
-    return this.props.title;
+  public get id(): string {
+    return this._id;
   }
 
   public set userId(userId: string) {
@@ -43,6 +39,14 @@ export class Task {
 
   public get userId(): string {
     return this.props.userId;
+  }
+
+  public set title(title: string) {
+    this.props.title = title;
+  }
+
+  public get title(): string {
+    return this.props.title;
   }
 
   public set description(description: string | undefined) {
@@ -77,8 +81,8 @@ export class Task {
     return this.props.dueDateAt;
   }
 
-  public set finishedAt(finishedAt: Date | null | undefined) {
-    this.props.finishedAt = finishedAt;
+  public finish() {
+    this.props.finishedAt = new Date();
   }
 
   public get finishedAt(): Date | null | undefined {
