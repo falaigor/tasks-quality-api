@@ -7,17 +7,13 @@ describe('Get user tasks', () => {
     const tasksRepository = new InMemoryTasksRepository();
     const getUserTasks = new GetUserTasks(tasksRepository);
 
-    await tasksRepository.create(
-      makeTask({
-        userId: 'user-id-one',
-      }),
-    );
+    const task = makeTask({
+      userId: 'user-id-one',
+    });
 
-    await tasksRepository.create(
-      makeTask({
-        userId: 'user-id-one',
-      }),
-    );
+    await tasksRepository.create(task);
+    await tasksRepository.create(task);
+
     await tasksRepository.create(
       makeTask({
         userId: 'user-id-two',
@@ -25,7 +21,7 @@ describe('Get user tasks', () => {
     );
 
     const { tasks } = await getUserTasks.execute({
-      userId: 'user-id-one',
+      userId: task.userId,
     });
 
     expect(tasks).toHaveLength(2);
