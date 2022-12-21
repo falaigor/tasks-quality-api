@@ -14,6 +14,10 @@ export class InMemoryTasksRepository implements TasksRepository {
     return task;
   }
 
+  async findManyByUserId(userId: string): Promise<Task[]> {
+    return this.tasks.filter((item) => item.userId === userId);
+  }
+
   async create(task: Task) {
     this.tasks.push(task);
   }
