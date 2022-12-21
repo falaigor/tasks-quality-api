@@ -12,6 +12,7 @@ export class PrismaTaskMapper {
       urlTask: task.urlTask,
       startedAt: task.startedAt,
       dueDateAt: task.dueDateAt,
+      finishedAt: task.finishedAt,
       createdAt: task.createdAt,
     };
   }
@@ -26,6 +27,7 @@ export class PrismaTaskMapper {
         urlTask: raw.urlTask,
         startedAt: raw.startedAt,
         dueDateAt: raw.dueDateAt,
+        finishedAt: raw.finishedAt,
         createdAt: raw.createdAt,
       },
       raw.id,

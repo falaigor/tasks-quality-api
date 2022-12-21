@@ -1,6 +1,7 @@
 import { TasksRepository } from '@application/repositories/tasks.repository';
 import { TaskNotFound } from './errors/task-not-found.error';
 import { Status } from '@application/entities/task/status';
+import { Injectable } from '@nestjs/common';
 
 interface UpdateStatusTaskRequest {
   taskId: string;
@@ -9,6 +10,7 @@ interface UpdateStatusTaskRequest {
 
 type UpdateStatusTaskResponse = void;
 
+@Injectable()
 export class UpdateStatusTask {
   constructor(private tasksRepository: TasksRepository) {}
 

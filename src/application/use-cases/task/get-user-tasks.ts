@@ -1,5 +1,6 @@
 import { Task } from '@application/entities/task/task';
 import { TasksRepository } from '@application/repositories/tasks.repository';
+import { Injectable } from '@nestjs/common';
 
 interface GetUserTasksRequest {
   userId: string;
@@ -9,6 +10,7 @@ interface GetUserTasksResponse {
   tasks: Task[];
 }
 
+@Injectable()
 export class GetUserTasks {
   constructor(private tasksRepository: TasksRepository) {}
 

@@ -1,5 +1,6 @@
 import { TasksRepository } from '@application/repositories/tasks.repository';
 import { TaskNotFound } from './errors/task-not-found.error';
+import { Injectable } from '@nestjs/common';
 
 interface FinishTaskRequest {
   taskId: string;
@@ -7,6 +8,7 @@ interface FinishTaskRequest {
 
 type FinishTaskResponse = void;
 
+@Injectable()
 export class FinishTask {
   constructor(private tasksRepository: TasksRepository) {}
 

@@ -10,7 +10,7 @@ describe('Send notification', () => {
       userId: 'fake-user-id',
       title: 'Task 1',
       description: 'Uma descrição da task',
-      startedAt: new Date(),
+      startedAt: new Date('2022-12-21T14:16:43.051Z'),
       dueDateAt: new Date(1671720896),
       urlTask: 'http://url-task.com',
     });

@@ -2,8 +2,10 @@ import { PrismaService } from '../prisma.service';
 import { Task } from '@application/entities/task/task';
 import { PrismaTaskMapper } from '../mappers/prisma-task.mapper';
 import { TasksRepository } from '@application/repositories/tasks.repository';
+import { Injectable } from '@nestjs/common';
 
-export class InMemoryTasksRepository implements TasksRepository {
+@Injectable()
+export class PrismaTaskRepository implements TasksRepository {
   constructor(private prismaService: PrismaService) {}
 
   async findById(taskId: string): Promise<Task | null> {
@@ -40,7 +42,7 @@ export class InMemoryTasksRepository implements TasksRepository {
     return count;
   }
 
-  async create(task: Task) {
+  async create(task: Task): Promise<void> {
     const raw = PrismaTaskMapper.toPrisma(task);
 
     await this.prismaService.task.create({
