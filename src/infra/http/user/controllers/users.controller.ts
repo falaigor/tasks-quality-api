@@ -18,8 +18,7 @@ import { DeactivateUser } from '@application/use-cases/user/deactivate-user';
 import { ChangeEmailUser } from '@application/use-cases/user/change-email-user';
 import { ChangeAvatarUser } from '@application/use-cases/user/change-avatar-user';
 import { GetUser } from '@application/use-cases/user/get-user';
-import { User } from '@application/entities/user/user';
-import { GetAllUsers } from '../../../../application/use-cases/user/get-all-users';
+import { GetAllUsers } from '@application/use-cases/user/get-all-users';
 import { UserNotFound } from '@application/use-cases/user/errors/user-not-found.error';
 import { UserAlreadyExists } from '@application/use-cases/user/errors/user-already-exists.error';
 
