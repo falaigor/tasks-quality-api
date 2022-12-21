@@ -6,7 +6,7 @@ export interface TaskProps {
   userId: string;
   title: string;
   description?: string;
-  status: string;
+  status: Status;
   startedAt?: Date | null;
   dueDateAt?: Date | null;
   finishedAt?: Date | null;
@@ -19,7 +19,7 @@ export class Task {
   private props: TaskProps;
 
   constructor(
-    props: Replace<TaskProps, { status?: string; createdAt?: Date }>,
+    props: Replace<TaskProps, { status?: Status; createdAt?: Date }>,
     id?: string,
   ) {
     this._id = id ?? randomUUID();
@@ -58,11 +58,11 @@ export class Task {
     return this.props.description;
   }
 
-  public set status(status: string) {
+  public set status(status: Status) {
     this.props.status = status;
   }
 
-  public get status(): string {
+  public get status(): Status {
     return this.props.status;
   }
 
