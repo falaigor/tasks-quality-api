@@ -1,5 +1,6 @@
 import { randomUUID } from 'crypto';
 import { Replace } from '@helpers/Replace';
+import { Status } from './status';
 
 export interface TaskProps {
   userId: string;
@@ -24,7 +25,7 @@ export class Task {
     this._id = id ?? randomUUID();
     this.props = {
       ...props,
-      status: props.status ?? 'waiting',
+      status: props.status ?? Status.WAITING,
       createdAt: props.createdAt ?? new Date(),
     };
   }
