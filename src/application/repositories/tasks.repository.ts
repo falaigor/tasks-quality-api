@@ -5,4 +5,5 @@ export abstract class TasksRepository {
   abstract save(task: Task): Promise<void>;
   abstract findById(taskId: string): Promise<Task | null>;
   abstract findManyByUserId(userId: string): Promise<Task[]>;
+  abstract countManyByUserId(userId: string): Promise<number>;
 }
