@@ -5,7 +5,7 @@ import { TaskNotFound } from '../errors/task-not-found.error';
 import { InMemoryTasksRepository } from '@test/repositories/in-memory-tasks.repository';
 
 describe('Update task status', () => {
-  it('should be able to update a task status', async () => {
+  it('should be able to update a task status for IN PROGRESS', async () => {
     const tasksRepository = new InMemoryTasksRepository();
     const updateStatusTask = new UpdateStatusTask(tasksRepository);
 
@@ -19,6 +19,38 @@ describe('Update task status', () => {
     });
 
     expect(tasksRepository.tasks[0].status).toEqual(Status.INPROGRESS);
+  });
+
+  it('should be able to update a task status for COMPLETED', async () => {
+    const tasksRepository = new InMemoryTasksRepository();
+    const updateStatusTask = new UpdateStatusTask(tasksRepository);
+
+    const task = makeTask();
+
+    await tasksRepository.create(task);
+
+    await updateStatusTask.execute({
+      taskId: task.id,
+      status: Status.COMPLETED,
+    });
+
+    expect(tasksRepository.tasks[0].status).toEqual(Status.COMPLETED);
+  });
+
+  it('should be able to update a task status for CANCELED', async () => {
+    const tasksRepository = new InMemoryTasksRepository();
+    const updateStatusTask = new UpdateStatusTask(tasksRepository);
+
+    const task = makeTask();
+
+    await tasksRepository.create(task);
+
+    await updateStatusTask.execute({
+      taskId: task.id,
+      status: Status.CANCELED,
+    });
+
+    expect(tasksRepository.tasks[0].status).toEqual(Status.CANCELED);
   });
 
   it('should not be able to finish a non existing task', async () => {
