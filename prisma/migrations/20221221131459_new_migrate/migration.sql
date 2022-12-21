@@ -9,24 +9,17 @@ CREATE TABLE "User" (
 );
 
 -- CreateTable
-CREATE TABLE "tasks" (
+CREATE TABLE "Task" (
     "id" TEXT NOT NULL PRIMARY KEY,
+    "userId" TEXT NOT NULL,
     "title" TEXT NOT NULL,
+    "description" TEXT,
     "status" TEXT NOT NULL,
-    "startedAt" DATETIME NOT NULL,
-    "finishedAt" DATETIME,
-    "url_task" TEXT NOT NULL,
+    "urlTask" TEXT,
+    "startedAt" DATETIME,
+    "dueDateAt" DATETIME,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "userId" TEXT
-);
-
--- CreateTable
-CREATE TABLE "issues" (
-    "id" TEXT NOT NULL PRIMARY KEY,
-    "description" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL,
-    "taskId" TEXT,
-    CONSTRAINT "issues_taskId_fkey" FOREIGN KEY ("taskId") REFERENCES "tasks" ("id") ON DELETE SET NULL ON UPDATE CASCADE
+    CONSTRAINT "Task_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateIndex

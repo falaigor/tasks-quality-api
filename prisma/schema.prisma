@@ -17,21 +17,21 @@ model User {
   avatar    String
   status    String
   createdAt DateTime @default(now())
+  Task      Task[]
 }
 
-// model Task {
-//   id         String    @id @default(uuid())
-//   title      String
-//   status     String
-//   startedAt  DateTime
-//   finishedAt DateTime?
-//   url_task   String
-//   createdAt  DateTime  @default(now())
-//   issues     Issues[]
-//   userId     String?
-
-//   @@map("tasks")
-// }
+model Task {
+  id          String    @id @default(uuid())
+  userId      String
+  title       String
+  description String?
+  status      String
+  urlTask     String?
+  startedAt   DateTime?
+  dueDateAt   DateTime?
+  createdAt   DateTime  @default(now())
+  user        User      @relation(fields: [userId], references: [id])
+}
 
 // model Issues {
 //   id          String   @id @default(uuid())

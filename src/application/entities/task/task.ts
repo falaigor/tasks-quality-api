@@ -5,12 +5,12 @@ import { Status } from './status';
 export interface TaskProps {
   userId: string;
   title: string;
-  description?: string;
-  status: Status;
+  description?: string | null;
+  status: string;
   startedAt?: Date | null;
   dueDateAt?: Date | null;
   finishedAt?: Date | null;
-  urlTask?: string;
+  urlTask?: string | null;
   createdAt: Date;
 }
 
@@ -19,7 +19,7 @@ export class Task {
   private props: TaskProps;
 
   constructor(
-    props: Replace<TaskProps, { status?: Status; createdAt?: Date }>,
+    props: Replace<TaskProps, { status?: string; createdAt?: Date }>,
     id?: string,
   ) {
     this._id = id ?? randomUUID();
@@ -50,19 +50,19 @@ export class Task {
     return this.props.title;
   }
 
-  public set description(description: string | undefined) {
+  public set description(description: string | null | undefined) {
     this.props.description = description;
   }
 
-  public get description(): string | undefined {
+  public get description(): string | null | undefined {
     return this.props.description;
   }
 
-  public set status(status: Status) {
+  public set status(status: string) {
     this.props.status = status;
   }
 
-  public get status(): Status {
+  public get status(): string {
     return this.props.status;
   }
 
@@ -90,11 +90,11 @@ export class Task {
     return this.props.finishedAt;
   }
 
-  public set urlTask(urlTask: string | undefined) {
+  public set urlTask(urlTask: string | null | undefined) {
     this.props.urlTask = urlTask;
   }
 
-  public get urlTask(): string | undefined {
+  public get urlTask(): string | null | undefined {
     return this.props.urlTask;
   }
 
