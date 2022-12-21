@@ -5,10 +5,17 @@ import { AddTask } from '@application/use-cases/task/add-task';
 import { GetUserTasks } from '@application/use-cases/task/get-user-tasks';
 import { CountUserTasks } from '@application/use-cases/task/count-user-tasks';
 import { FinishTask } from '@application/use-cases/task/finish-task';
+import { UpdateStatusTask } from '@application/use-cases/task/update-status-task';
 
 @Module({
   imports: [DatabaseModule],
   controllers: [TasksController],
-  providers: [AddTask, GetUserTasks, CountUserTasks, FinishTask],
+  providers: [
+    AddTask,
+    GetUserTasks,
+    CountUserTasks,
+    FinishTask,
+    UpdateStatusTask,
+  ],
 })
 export class TaskModule {}

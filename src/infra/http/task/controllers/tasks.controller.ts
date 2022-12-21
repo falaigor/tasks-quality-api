@@ -15,6 +15,8 @@ import { GetUserTasks } from '@application/use-cases/task/get-user-tasks';
 import { CountUserTasks } from '@application/use-cases/task/count-user-tasks';
 import { TaskNotFound } from '@application/use-cases/task/errors/task-not-found.error';
 import { FinishTask } from '@application/use-cases/task/finish-task';
+import { UpdateStatusTask } from '../../../../application/use-cases/task/update-status-task';
+import { Status } from '@application/entities/task/status';
 
 @Controller('tasks')
 export class TasksController {
@@ -23,7 +25,27 @@ export class TasksController {
     private getUserTasks: GetUserTasks,
     private countUserTasks: CountUserTasks,
     private finishTask: FinishTask,
+    private updateStatusTask: UpdateStatusTask,
   ) {}
+
+  @Patch(':taskId/status')
+  async status(
+    @Param('taskId') taskId: string,
+    @Body() body: { status: Status },
+  ) {
+    try {
+      const { status } = body;
+
+      await this.updateStatusTask.execute({
+        taskId,
+        status,
+      });
+    } catch (err) {
+      if (err instanceof TaskNotFound) {
+        throw new HttpException('Task not found', HttpStatus.BAD_REQUEST);
+      }
+    }
+  }
 
   @Patch(':taskId/finish')
   async finish(@Param('taskId') taskId: string) {
