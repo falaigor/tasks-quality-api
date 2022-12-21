@@ -9,8 +9,8 @@ const config: Config = {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
   coveragePathIgnorePatterns: ['dist'],
-  collectCoverageFrom: ['**/*.(t|j)s'],
-  coverageDirectory: '../coverage',
+  collectCoverageFrom: ['src/**/*.(t|j)s'],
+  coverageDirectory: './coverage',
   testEnvironment: 'node',
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
     prefix: '<rootDir>/',
