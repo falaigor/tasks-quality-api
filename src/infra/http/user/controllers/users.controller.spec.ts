@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaService } from '@infra/database/prisma/prisma.service';
 import { UsersRepository } from '@application/repositories/users.repository';
-import { PrismaUserRepository } from '@infra/database/prisma/repositories/prisma-users.repository';
+import { PrismaUserRepository } from '@infra/database/prisma/user/repositories/prisma-users.repository';
 import { UsersController } from './users.controller';
 import { CreateUser } from '@application/use-cases/user/create-user';
 import { DeactivateUser } from '@application/use-cases/user/deactivate-user';

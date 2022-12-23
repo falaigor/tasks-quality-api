@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TasksController } from './tasks.controller';
 import { PrismaService } from '@infra/database/prisma/prisma.service';
 import { TasksRepository } from '@application/repositories/tasks.repository';
-import { PrismaTaskRepository } from '@infra/database/prisma/repositories/prisma-tasks.repository';
+import { PrismaTaskRepository } from '@infra/database/prisma/task/repositories/prisma-tasks.repository';
 import { AddTask } from '@application/use-cases/task/add-task';
 import { GetUserTasks } from '@application/use-cases/task/get-user-tasks';
 import { CountUserTasks } from '@application/use-cases/task/count-user-tasks';

@@ -1,4 +1,4 @@
-import { PrismaService } from '../prisma.service';
+import { PrismaService } from '../../prisma.service';
 import { Task } from '@application/entities/task/task';
 import { PrismaTaskMapper } from '../mappers/prisma-task.mapper';
 import { TasksRepository } from '@application/repositories/tasks.repository';
