@@ -40,6 +40,10 @@ export class Issue {
     return this.props.description;
   }
 
+  public finish() {
+    this.props.finishedAt = new Date();
+  }
+
   public get finishedAt(): Date | null | undefined {
     return this.props.finishedAt;
   }

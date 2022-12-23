@@ -4,15 +4,15 @@ import { IssuesRepository } from '@application/repositories/issues.repository';
 export class InMemoryIssuesRepository implements IssuesRepository {
   public issues: Issue[] = [];
 
-  // async findById(taskId: string): Promise<Task | null> {
-  //   const task = this.tasks.find((item) => item.id === taskId);
+  async findById(issueId: string): Promise<Issue | null> {
+    const issue = this.issues.find((item) => item.id === issueId);
 
-  //   if (!task) {
-  //     return null;
-  //   }
+    if (!issue) {
+      return null;
+    }
 
-  //   return task;
-  // }
+    return issue;
+  }
 
   // async findManyByUserId(userId: string): Promise<Task[]> {
   //   return this.tasks.filter((item) => item.userId === userId);
