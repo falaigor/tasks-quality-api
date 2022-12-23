@@ -88,8 +88,8 @@ export class TasksController {
       title,
       description,
       urlTask,
-      startedAt: new Date(startedAt),
-      dueDateAt: new Date(dueDateAt),
+      startedAt,
+      dueDateAt,
     });
 
     return {
