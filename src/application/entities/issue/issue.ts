@@ -4,6 +4,7 @@ import { randomUUID } from 'crypto';
 export interface IssueProps {
   taskId: string;
   description: string;
+  finishedAt?: Date | null;
   createdAt: Date;
 }
 
@@ -37,6 +38,10 @@ export class Issue {
 
   public get description(): string {
     return this.props.description;
+  }
+
+  public get finishedAt(): Date | null | undefined {
+    return this.props.finishedAt;
   }
 
   public get createdAt(): Date {
