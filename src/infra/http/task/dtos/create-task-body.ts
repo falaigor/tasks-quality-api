@@ -8,9 +8,6 @@ export class CreateTaskBody {
   @IsNotEmpty()
   userId: string;
 
-  @IsNotEmpty()
-  status: string;
-
   description: string;
   urlTask: string;
   startedAt: Date;
