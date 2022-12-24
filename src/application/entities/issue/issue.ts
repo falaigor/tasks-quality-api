@@ -5,6 +5,7 @@ export interface IssueProps {
   taskId: string;
   description: string;
   finishedAt?: Date | null;
+  canceledAt?: Date | null;
   createdAt: Date;
 }
 
@@ -46,6 +47,14 @@ export class Issue {
 
   public get finishedAt(): Date | null | undefined {
     return this.props.finishedAt;
+  }
+
+  public cancel() {
+    this.props.canceledAt = new Date();
+  }
+
+  public get canceledAt(): Date | null | undefined {
+    return this.props.canceledAt;
   }
 
   public get createdAt(): Date {
