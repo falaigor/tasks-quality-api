@@ -14,13 +14,13 @@ export class InMemoryIssuesRepository implements IssuesRepository {
     return issue;
   }
 
-  // async findManyByUserId(userId: string): Promise<Task[]> {
-  //   return this.tasks.filter((item) => item.userId === userId);
-  // }
+  async findManyByTaskId(taskId: string): Promise<Issue[]> {
+    return this.issues.filter((item) => item.taskId === taskId);
+  }
 
-  // async countManyByUserId(userId: string): Promise<number> {
-  //   return this.tasks.filter((task) => task.userId === userId).length;
-  // }
+  async countManyByTaskId(taskId: string): Promise<number> {
+    return this.issues.filter((task) => task.taskId === taskId).length;
+  }
 
   async create(issue: Issue) {
     this.issues.push(issue);

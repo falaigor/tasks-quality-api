@@ -32,14 +32,15 @@ model Task {
   finishedAt  DateTime?
   createdAt   DateTime  @default(now())
   user        User      @relation(fields: [userId], references: [id])
+  Issues      Issues[]
 }
 
-// model Issues {
-//   id          String   @id @default(uuid())
-//   description String
-//   createdAt   DateTime
-//   Task        Task?    @relation(fields: [taskId], references: [id])
-//   taskId      String?
-
-//   @@map("issues")
-// }
+model Issues {
+  id          String    @id @default(uuid())
+  description String
+  createdAt   DateTime
+  finishedAt  DateTime?
+  canceledAt  DateTime?
+  taskId      String?
+  Task        Task?     @relation(fields: [taskId], references: [id])
+}

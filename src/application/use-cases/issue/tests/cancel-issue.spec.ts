@@ -3,7 +3,7 @@ import { IssueNotFound } from '../errors/issue-not-found.error';
 import { makeIssue } from '@test/factories/issue.factory';
 import { InMemoryIssuesRepository } from '@test/repositories/in-memory-issues.repository';
 
-describe('Finish issue', () => {
+describe('Cancel issue', () => {
   it('should be able to cancel a issue', async () => {
     const issuesRepository = new InMemoryIssuesRepository();
     const cancelIssue = new CancelIssue(issuesRepository);
