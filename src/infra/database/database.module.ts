@@ -4,7 +4,7 @@ import { PrismaService } from './prisma/prisma.service';
 import { TasksRepository } from '@application/repositories/tasks.repository';
 import { UsersRepository } from '@application/repositories/users.repository';
 
-import { PrismaUserRepository } from './prisma/task/repositories/prisma-users.repository';
+import { PrismaUserRepository } from './prisma/user/repositories/prisma-users.repository';
 import { PrismaTaskRepository } from './prisma/task/repositories/prisma-tasks.repository';
 
 @Module({
