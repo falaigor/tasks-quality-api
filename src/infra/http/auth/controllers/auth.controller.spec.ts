@@ -1,19 +1,24 @@
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
 import { Test, TestingModule } from '@nestjs/testing';
+
 import { AuthController } from './auth.controller';
 import { AuthService } from '../services/auth.service';
+
 import { LocalStrategy } from '../strategies/local.strategy';
 import { JwtStrategy } from '../strategies/jwt.strategy';
+
 import { DatabaseModule } from '@infra/database/database.module';
 import { UserModule } from '@infra/http/user/user.module';
-import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
+
+import { LoginGithub } from '@application/use-cases/auth/login-github';
 
 describe('Issues Controller', () => {
   let authController: AuthController;
-  let authService: AuthService;
+  let loginGithub: LoginGithub;
 
-  const AuthServiceProvider = {
-    provide: AuthService,
+  const LoginGithubProvider = {
+    provide: LoginGithub,
     useFactory: () => ({
       execute: jest.fn(() => []),
     }),
@@ -31,11 +36,11 @@ describe('Issues Controller', () => {
           signOptions: { expiresIn: '1d' },
         }),
       ],
-      providers: [AuthService, LocalStrategy, JwtStrategy, AuthServiceProvider],
+      providers: [AuthService, LocalStrategy, JwtStrategy, LoginGithubProvider],
     }).compile();
 
     authController = module.get<AuthController>(AuthController);
-    authService = module.get<AuthService>(AuthService);
+    loginGithub = module.get<LoginGithub>(LoginGithub);
   });
 
   it('should be defined', async () => {
@@ -47,8 +52,8 @@ describe('Issues Controller', () => {
       code: '123-asd-123',
     };
 
-    await authController.loginGithub(body);
+    await authController.loginWithGithub(body);
 
-    expect(authService.execute).toHaveBeenCalled();
+    expect(loginGithub.execute).toHaveBeenCalled();
   });
 });

@@ -11,6 +11,8 @@ import { AuthController } from './controllers/auth.controller';
 
 import { AuthService } from './services/auth.service';
 
+import { LoginGithub } from '@application/use-cases/auth/login-github';
+
 @Module({
   imports: [
     DatabaseModule,
@@ -22,6 +24,6 @@ import { AuthService } from './services/auth.service';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, LoginGithub, LocalStrategy, JwtStrategy],
 })
 export class AuthModule {}
