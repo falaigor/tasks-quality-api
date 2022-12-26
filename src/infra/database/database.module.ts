@@ -25,6 +25,13 @@ import { PrismaIssueRepository } from './prisma/issue/repositories/prisma-issues
       useClass: PrismaIssueRepository,
     },
   ],
-  exports: [UsersRepository, TasksRepository, IssuesRepository],
+  exports: [
+    {
+      provide: UsersRepository,
+      useClass: PrismaUserRepository,
+    },
+    TasksRepository,
+    IssuesRepository,
+  ],
 })
 export class DatabaseModule {}

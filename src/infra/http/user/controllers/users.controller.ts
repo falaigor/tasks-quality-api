@@ -8,6 +8,7 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateUserBody } from '../dtos/create-user-body';
 import { UserViewModel } from '../view-models/user.view-model';
@@ -21,6 +22,7 @@ import { GetUser } from '@application/use-cases/user/get-user';
 import { GetAllUsers } from '@application/use-cases/user/get-all-users';
 import { UserNotFound } from '@application/use-cases/user/errors/user-not-found.error';
 import { UserAlreadyExists } from '@application/use-cases/user/errors/user-already-exists.error';
+import { JwtAuthGuard } from '@infra/http/auth/guards/jwt-auth.guard';
 
 @Controller('users')
 export class UsersController {
@@ -34,6 +36,7 @@ export class UsersController {
     private getAllUsers: GetAllUsers,
   ) {}
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':userId/deactivate')
   async deactivate(@Param('userId') userId: string) {
     try {
@@ -45,6 +48,7 @@ export class UsersController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':userId/change-email')
   async changeEmail(
     @Param('userId') userId: string,
@@ -60,6 +64,7 @@ export class UsersController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':userId/change-avatar')
   async changeAvatar(
     @Param('userId') userId: string,
@@ -75,6 +80,7 @@ export class UsersController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   async getAll() {
     const { users } = await this.getAllUsers.execute();
@@ -84,6 +90,7 @@ export class UsersController {
     };
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':userId')
   async getUserById(@Param('userId') userId: string) {
     try {
@@ -101,6 +108,7 @@ export class UsersController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() body: CreateUserBody) {
     try {
@@ -121,6 +129,7 @@ export class UsersController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':userId/delete')
   async delete(@Param('userId') userId: string) {
     try {
