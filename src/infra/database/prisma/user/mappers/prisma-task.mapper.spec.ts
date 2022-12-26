@@ -2,7 +2,7 @@ import { User } from '@application/entities/user/user';
 import { PrismaUserMapper } from './prisma-user.mapper';
 import { Email } from '@application/entities/user/email';
 
-describe('User mapper', () => {
+describe('Prisma User mapper', () => {
   it('should be able to return a user mapper to Domain', () => {
     const user = PrismaUserMapper.toDomain({
       id: '961c5772-c0a6-4eb5-90f0-093141ff789d',

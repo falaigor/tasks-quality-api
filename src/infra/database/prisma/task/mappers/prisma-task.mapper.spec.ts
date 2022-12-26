@@ -1,7 +1,7 @@
 import { PrismaTaskMapper } from './prisma-task.mapper';
 import { Task } from '@application/entities/task/task';
 
-describe('Task mapper', () => {
+describe('Prisma Task mapper', () => {
   it('should be able to return a task mapper to Domain', () => {
     const task = PrismaTaskMapper.toDomain({
       id: '961c5772-c0a6-4eb5-90f0-093141ff789d',

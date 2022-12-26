@@ -26,7 +26,7 @@ describe('Prisma Issue mapper', () => {
     expect(issue).toEqual(raw);
   });
 
-  it('should be able to return a task mapper to Prisma', () => {
+  it('should be able to return a issue mapper to Prisma', () => {
     const raw = new Issue({
       taskId: 'dbe484fb-c8d7-464f-a05f-67417766f177',
       description: 'task.description',
