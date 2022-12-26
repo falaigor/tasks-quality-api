@@ -7,6 +7,7 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateTaskBody } from '../dtos/create-task-body';
 import { TaskViewModel } from '../view-models/task.view-model';
@@ -17,6 +18,7 @@ import { TaskNotFound } from '@application/use-cases/task/errors/task-not-found.
 import { FinishTask } from '@application/use-cases/task/finish-task';
 import { UpdateStatusTask } from '../../../../application/use-cases/task/update-status-task';
 import { Status } from '@application/entities/task/status';
+import { JwtAuthGuard } from '@infra/http/auth/guards/jwt-auth.guard';
 
 @Controller('tasks')
 export class TasksController {
@@ -28,6 +30,7 @@ export class TasksController {
     private updateStatusTask: UpdateStatusTask,
   ) {}
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':taskId/status')
   async status(
     @Param('taskId') taskId: string,
@@ -47,6 +50,7 @@ export class TasksController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':taskId/finish')
   async finish(@Param('taskId') taskId: string) {
     try {
@@ -58,6 +62,7 @@ export class TasksController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('count/from/:userId')
   async countFromUser(
     @Param('userId') userId: string,
@@ -69,6 +74,7 @@ export class TasksController {
     return count;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('from/:userId')
   async getFromUser(@Param('userId') userId: string) {
     const { tasks } = await this.getUserTasks.execute({
@@ -80,6 +86,7 @@ export class TasksController {
     };
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() body: CreateTaskBody) {
     const { userId, title, description, urlTask, startedAt, dueDateAt } = body;
