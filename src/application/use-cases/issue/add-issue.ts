@@ -1,5 +1,6 @@
 import { Issue } from '@application/entities/issue/issue';
 import { IssuesRepository } from '@application/repositories/issues.repository';
+import { Injectable } from '@nestjs/common';
 
 interface AddIssueRequest {
   taskId: string;
@@ -10,6 +11,7 @@ interface AddIssueResponse {
   issue: Issue;
 }
 
+@Injectable()
 export class AddIssue {
   constructor(private issuesRepository: IssuesRepository) {}
 

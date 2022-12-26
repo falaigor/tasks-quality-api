@@ -1,5 +1,6 @@
 import { IssuesRepository } from '@application/repositories/issues.repository';
 import { IssueNotFound } from './errors/issue-not-found.error';
+import { Injectable } from '@nestjs/common';
 
 interface FinishIssueRequest {
   issueId: string;
@@ -7,6 +8,7 @@ interface FinishIssueRequest {
 
 type FinishIssueResponse = void;
 
+@Injectable()
 export class FinishIssue {
   constructor(private issuesRepository: IssuesRepository) {}
 
