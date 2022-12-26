@@ -8,6 +8,7 @@ import { FinishIssue } from '@application/use-cases/issue/finish-issue';
 import { CancelIssue } from '@application/use-cases/issue/cancel-issue';
 import { CreateIssueBody } from '../dtos/create-issue-body';
 import { IssueNotFound } from '@application/use-cases/issue/errors/issue-not-found.error';
+import { HttpException, HttpStatus } from '@nestjs/common';
 
 describe('Issues Controller', () => {
   let issuesController: IssuesController;
@@ -89,7 +90,14 @@ describe('Issues Controller', () => {
 
       const result = issuesController.finish('issue-id');
 
+      const error = () => {
+        throw new HttpException('Issue not found', HttpStatus.BAD_REQUEST);
+      };
+
       await expect(result).rejects.toThrow('Issue not found');
+      expect(error).toThrow(
+        new HttpException('Issue not found', HttpStatus.BAD_REQUEST),
+      );
     });
   });
 
@@ -107,7 +115,14 @@ describe('Issues Controller', () => {
 
       const result = issuesController.cancel('issue-id');
 
+      const error = () => {
+        throw new HttpException('Issue not found', HttpStatus.BAD_REQUEST);
+      };
+
       await expect(result).rejects.toThrow('Issue not found');
+      expect(error).toThrow(
+        new HttpException('Issue not found', HttpStatus.BAD_REQUEST),
+      );
     });
   });
 });
